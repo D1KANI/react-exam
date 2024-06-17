@@ -96,13 +96,13 @@
       ],
       "skipQuestions": [
         "scope",
-        "breakingBody"
+        "breakingBody",
+        "issues"
       ],
       "questions": {
         "type": "Тип изменений:",
         "subject": "Краткое описание коммита:",
-        "body": "Полное описание изменений (опционально):",
-        "issues": "Номер таски в fibery (опционально):"
+        "body": "Полное описание изменений (опционально):"
       },
       "replaceTypes": true,
       "conventionalFormat": true
