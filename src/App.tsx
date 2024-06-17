@@ -1,7 +1,12 @@
-import "./App.css";
-import { Routes } from "@/types/router";
-import { getRoute } from "@/utils/getRoute";
+import { Login } from "@/pages/login/Login";
+
+import "@/styles/global.scss";
+import "@mantine/core/styles.css";
 
 export const App = () => {
-  return <>{getRoute(Routes.TASK, { id: "3" })}</>;
+  return (
+    <>
+      <Login />
+    </>
+  );
 };
