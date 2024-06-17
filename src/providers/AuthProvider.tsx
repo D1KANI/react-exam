@@ -12,6 +12,7 @@ export const AuthProvider = (props: Props) => {
 
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   const signIn = (newUser: string, callback?: (...args: any[]) => any) => {
+    // TODO: Изменить на имитацию backend
     setUser(newUser);
     localStorage.setItem("user", newUser);
 
@@ -22,6 +23,7 @@ export const AuthProvider = (props: Props) => {
 
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   const signOut = (callback?: (...args: any[]) => any) => {
+    // TODO: Изменить на имитацию backend
     setUser(null);
     localStorage.removeItem("user");
 

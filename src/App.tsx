@@ -1,12 +1,16 @@
-import { Login } from "@/pages/login/Login";
+import { AuthProvider } from "@/providers/AuthProvider";
+import { RouterProvider } from "react-router-dom";
+import { router } from "@/configs/router";
 
-import "@/styles/global.scss";
 import "@mantine/core/styles.css";
+import "@/styles/global.scss";
 
 export const App = () => {
   return (
     <>
-      <Login />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </>
   );
 };
