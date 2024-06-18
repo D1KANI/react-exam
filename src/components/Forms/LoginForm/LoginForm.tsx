@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { Button, Group, PasswordInput, TextInput } from "@mantine/core";
+import { Button, Group, PasswordInput, Stack, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useAuth } from "@/hooks/useAuth";
 import { Routes } from "@/types/router";
@@ -49,26 +49,28 @@ export const LoginForm = () => {
 
   return (
     <form onSubmit={form.onSubmit(handleSubmit)}>
-      <TextInput
-        key={form.key("login")}
-        name="login"
-        label="Login"
-        variant="filled"
-        size="md"
-        autoComplete="false"
-        {...form.getInputProps("login")}
-      />
-      <PasswordInput
-        key={form.key("password")}
-        name="password"
-        type="password"
-        label="Password"
-        variant="filled"
-        size="md"
-        autoComplete="new-password"
-        {...form.getInputProps("password")}
-      />
-      <Group justify="center">
+      <Stack>
+        <TextInput
+          key={form.key("login")}
+          name="login"
+          label="Login"
+          variant="filled"
+          size="md"
+          autoComplete="false"
+          {...form.getInputProps("login")}
+        />
+        <PasswordInput
+          key={form.key("password")}
+          name="password"
+          type="password"
+          label="Password"
+          variant="filled"
+          size="md"
+          autoComplete="new-password"
+          {...form.getInputProps("password")}
+        />
+      </Stack>
+      <Group justify="center" mt="md">
         <Button type="submit" variant="filled" size="md">
           Submit
         </Button>
