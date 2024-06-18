@@ -1,4 +1,5 @@
 @import "font";
+@import "ui";
 
 *,
 *::after,
@@ -8,4 +9,10 @@
 
 a {
   text-decoration: none;
+}
+
+html,
+body,
+#root {
+  min-height: 100svh;
 }
