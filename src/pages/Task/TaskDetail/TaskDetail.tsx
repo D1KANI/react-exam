@@ -31,6 +31,7 @@ export const TaskDetail = () => {
           return;
         }
         const data = await dexieService.getTask(numberId);
+        if (!data) navigate(Routes.ERROR);
         setData(data);
       } catch (error) {
         console.error(`TaskDetail [getTask]: ${error}`);
