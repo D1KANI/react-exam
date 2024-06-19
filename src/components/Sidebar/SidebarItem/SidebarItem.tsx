@@ -1,10 +1,11 @@
 import { Box, Flex, Text } from "@mantine/core";
-import { ISidebar } from "@/types/sidebar";
 import { Link } from "react-router-dom";
 import { getRoute } from "@/utils/getRoute";
 import { Routes } from "@/types/router";
+import { ITask } from "@/types/dexie";
+import { parseDate } from "@/utils/parseDate";
 
-interface IProps extends ISidebar {}
+interface IProps extends ITask {}
 
 export const SidebarItem = (props: IProps) => {
   return (
@@ -21,7 +22,7 @@ export const SidebarItem = (props: IProps) => {
           {props.label}
         </Text>
         <Text size="xs" c="text">
-          {props.date}
+          {parseDate(props.date)}
         </Text>
       </Flex>
     </Box>

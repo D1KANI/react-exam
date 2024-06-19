@@ -7,11 +7,13 @@ import Underline from "@tiptap/extension-underline";
 import TextAlign from "@tiptap/extension-text-align";
 import Superscript from "@tiptap/extension-superscript";
 import SubScript from "@tiptap/extension-subscript";
-import { Paper } from "@mantine/core";
+import { Paper, TextInput } from "@mantine/core";
+import { ITask } from "@/types/dexie";
+import { useEffect } from "react";
 
 interface IProps {
-  content?: string;
-  onChange?: (content: string) => void;
+  data: ITask;
+  onChange: (data: ITask) => void;
 }
 
 export const Editor = (props: IProps) => {
@@ -25,20 +27,37 @@ export const Editor = (props: IProps) => {
       Highlight,
       TextAlign.configure({ types: ["heading", "paragraph"] }),
     ],
-    content: props.content || "",
+    content: props.data?.content || "",
     onUpdate: ({ editor }) => {
-      handleChange(editor);
+      handleChangeEditor(editor);
     },
   });
 
-  const handleChange = (editor: IEditor) => {
+  const handleChangeEditor = (editor: IEditor) => {
     if (props.onChange) {
-      props.onChange(editor.getHTML());
+      props.onChange({ ...props.data, content: editor.getHTML() });
     }
   };
 
+  const handleChangeLabel = ({
+    target,
+  }: React.ChangeEvent<HTMLInputElement>) => {
+    props.onChange({ ...props.data, label: target.value });
+  };
+
+  useEffect(() => {
+    if (editor) {
+      editor.commands.setContent(props.data.content);
+    }
+  }, [props.data.content, editor]);
+
   return (
     <Paper shadow="sm">
+      <TextInput
+        value={props.data.label}
+        label="Task label"
+        onChange={handleChangeLabel}
+      />
       <RichTextEditor editor={editor}>
         <RichTextEditor.Toolbar sticky stickyOffset={60}>
           <RichTextEditor.ControlsGroup>

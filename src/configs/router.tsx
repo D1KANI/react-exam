@@ -6,6 +6,7 @@ import { Routes } from "@/types/router";
 import { TaskDetail } from "@/pages/Task/TaskDetail/TaskDetail";
 import { TaskAdd } from "@/pages/Task/TaskAdd/TaskAdd";
 import { Login } from "@/pages/Login/Login";
+import { Error } from "@/pages/Error/Error";
 
 export const router = createBrowserRouter([
   // ---------- PRIVATE ROUTES ----------
@@ -40,6 +41,14 @@ export const router = createBrowserRouter([
       {
         path: Routes.LOGIN,
         element: <Login />,
+      },
+      {
+        path: Routes.ERROR,
+        element: <Error />,
+      },
+      {
+        path: "*",
+        element: <Error />,
       },
     ],
   },

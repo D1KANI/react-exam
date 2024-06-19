@@ -1,25 +1,60 @@
-import { Paper } from "@mantine/core";
-import { ISidebar } from "@/types/sidebar";
+import { Box, Button, Paper } from "@mantine/core";
 import { SidebarItem } from "@/components/Sidebar/SidebarItem/SidebarItem";
-
-const testData: ISidebar[] = [
-  {
-    label: "Test sidebar data",
-    date: "01.01.2024",
-    id: 1,
-  },
-  {
-    label: "Test sidebar data",
-    date: "01.01.2024",
-    id: 2,
-  },
-];
+import { useLocation, useNavigate } from "react-router-dom";
+import { getRoute } from "@/utils/getRoute";
+import { Routes } from "@/types/router";
+import { useEffect, useState } from "react";
+import { dexieService } from "@/services/dexie";
+import { ITask } from "@/types/dexie";
 
 export const Sidebar = () => {
+  const [tasks, setTasks] = useState<ITask[]>([]);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const addTask = async () => {
+    try {
+      const id = await dexieService.addNewTask({
+        label: "New task",
+        content: "Edit this content",
+        date: Date.now(),
+      });
+
+      if (id) {
+        await getTasks();
+        navigate(getRoute(Routes.TASK, { id }));
+      }
+    } catch (error) {
+      console.error(`Sidebar [addTask]: ${error}`);
+    }
+  };
+
+  const getTasks = async () => {
+    try {
+      const data = await dexieService.getTaskList();
+      if (data) setTasks(data);
+    } catch (error) {
+      console.error(`Sidebar [getTasks]: ${error}`);
+    }
+  };
+
+  useEffect(() => {
+    getTasks();
+  }, []);
+
+  useEffect(() => {
+    getTasks();
+  }, [location.pathname]);
+
   return (
     <Paper shadow="sm" radius="md" style={{ overflow: "hidden" }} py={"md"}>
-      {testData &&
-        testData.map((item) => <SidebarItem key={item.id} {...item} />)}
+      <Box px={"md"} py={"xs"}>
+        <Button w="100%" onClick={addTask}>
+          Add new task
+        </Button>
+      </Box>
+      {tasks.length &&
+        tasks.map((item) => <SidebarItem key={item.id} {...item} />)}
     </Paper>
   );
 };
