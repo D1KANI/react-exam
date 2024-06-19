@@ -11,14 +11,15 @@ const testData: ISidebar[] = [
   {
     label: "Test sidebar data",
     date: "01.01.2024",
-    id: 1,
+    id: 2,
   },
 ];
 
 export const Sidebar = () => {
   return (
     <Paper shadow="sm" radius="md" style={{ overflow: "hidden" }} py={"md"}>
-      {testData && testData.map((item) => <SidebarItem {...item} />)}
+      {testData &&
+        testData.map((item) => <SidebarItem key={item.id} {...item} />)}
     </Paper>
   );
 };
