@@ -6,6 +6,6 @@
     ],
     "type-case": [2, "always", "upper-case"],
     "header-max-length": [0, "always", 75],
-    "scope-case": [2, "always", "pascal-case"]
+    "scope-case": [2, "always", ["pascal-case", "upper-case"]]
   }
 }
