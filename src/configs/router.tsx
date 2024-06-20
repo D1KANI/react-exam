@@ -4,7 +4,6 @@ import { Index } from "@/pages/Index/Index";
 import { PrivateRoute } from "@/components/PrivateRoute";
 import { Routes } from "@/types/router";
 import { TaskDetail } from "@/pages/Task/TaskDetail/TaskDetail";
-import { TaskAdd } from "@/pages/Task/TaskAdd/TaskAdd";
 import { Login } from "@/pages/Login/Login";
 import { Error } from "@/pages/Error/Error";
 
@@ -25,10 +24,6 @@ export const router = createBrowserRouter([
       {
         path: Routes.TASK,
         element: <TaskDetail />,
-      },
-      {
-        path: Routes.TASK_ADD,
-        element: <TaskAdd />,
       },
     ],
   },
