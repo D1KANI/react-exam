@@ -1,4 +1,4 @@
-import { Box, Button, Paper } from "@mantine/core";
+import { Box, Button, Center, Paper } from "@mantine/core";
 import { SidebarItem } from "@/components/Sidebar/SidebarItem/SidebarItem";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getRoute } from "@/utils/getRoute";
@@ -53,8 +53,13 @@ export const Sidebar = () => {
           Add new task
         </Button>
       </Box>
-      {tasks.length &&
-        tasks.map((item) => <SidebarItem key={item.id} {...item} />)}
+      {tasks.length ? (
+        tasks.map((item) => <SidebarItem key={item.id} {...item} />)
+      ) : (
+        <Box px={"md"} py={"xs"}>
+          <Center>You hasn't tasks</Center>
+        </Box>
+      )}
     </Paper>
   );
 };
