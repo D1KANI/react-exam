@@ -2,10 +2,10 @@ import type { VitePWAOptions } from "vite-plugin-pwa";
 
 export const vitePwaConfig: Partial<VitePWAOptions> = {
   registerType: "prompt",
-  includeAssets: [
-    "/favicon/apple-touch-icon.png",
-    "/favicon/safari-pinned-tab.svg",
-  ],
+  workbox: {
+    globPatterns: ["**/*"],
+  },
+  includeAssets: ["**/*"],
   manifest: {
     name: "Task manager by DIKANI",
     short_name: "Task manager",

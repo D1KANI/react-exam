@@ -23,19 +23,15 @@ export const TaskDetail = () => {
 
   const getTask = useCallback(
     async (id?: number | string) => {
-      try {
-        const numberId = Number(id);
+      const numberId = Number(id);
 
-        if (Number.isNaN(numberId)) {
-          navigate(Routes.ERROR);
-          return;
-        }
-        const data = await dexieService.getTask(numberId);
-        if (!data) navigate(Routes.ERROR);
-        setData(data);
-      } catch (error) {
-        console.error(`TaskDetail [getTask]: ${error}`);
+      if (Number.isNaN(numberId)) {
+        navigate(Routes.ERROR);
+        return;
       }
+      const { data } = await dexieService.getTask(numberId);
+      if (!data) return navigate(Routes.ERROR);
+      setData(data);
     },
     [navigate],
   );
@@ -51,23 +47,15 @@ export const TaskDetail = () => {
       ...newData,
     }));
     timerRef.current = setTimeout(() => {
-      try {
-        dexieService.updateTask(newData);
-      } catch (error) {
-        console.error(`TaskDetail [handleChange]: ${error}`);
-      }
+      dexieService.updateTask(newData);
     }, 400);
   };
 
-  const handleRemove = () => {
+  const handleRemove = async () => {
     if (!data) return;
 
-    try {
-      dexieService.removeTask(data.id);
-      navigate(Routes.INDEX);
-    } catch (error) {
-      console.error(`TaskDetail [handleRemove]: ${error}`);
-    }
+    const { status } = await dexieService.removeTask(data.id);
+    if (status === 200) navigate(Routes.INDEX);
   };
 
   useEffect(() => {

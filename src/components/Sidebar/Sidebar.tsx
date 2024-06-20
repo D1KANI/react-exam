@@ -13,29 +13,21 @@ export const Sidebar = () => {
   const location = useLocation();
 
   const addTask = async () => {
-    try {
-      const id = await dexieService.addNewTask({
-        label: "New task",
-        content: "Edit this content",
-        date: Date.now(),
-      });
+    const { data: id } = await dexieService.addNewTask({
+      label: "New task",
+      content: "Edit this content",
+      date: Date.now(),
+    });
 
-      if (id) {
-        await getTasks();
-        navigate(getRoute(Routes.TASK, { id }));
-      }
-    } catch (error) {
-      console.error(`Sidebar [addTask]: ${error}`);
+    if (id) {
+      await getTasks();
+      navigate(getRoute(Routes.TASK, { id }));
     }
   };
 
   const getTasks = async () => {
-    try {
-      const data = await dexieService.getTaskList();
-      if (data) setTasks(data);
-    } catch (error) {
-      console.error(`Sidebar [getTasks]: ${error}`);
-    }
+    const { data } = await dexieService.getTaskList();
+    if (data) setTasks(data);
   };
 
   useEffect(() => {
