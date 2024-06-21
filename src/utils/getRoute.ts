@@ -1,4 +1,4 @@
-import { Routes, dynamicRoutes } from "../types/router";
+import { Routes, dynamicRoutes } from "@/types/router";
 
 export const getRoute = (
   route: Routes,
