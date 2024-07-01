@@ -1,0 +1,50 @@
+import { createBrowserRouter } from "react-router-dom";
+import { DefaultLayout } from "@/layouts/DefaultLayout";
+import { Index } from "@/pages/Index/Index";
+import { PrivateRoute } from "@/components/PrivateRoute";
+import { Routes } from "@/types/router";
+import { TaskDetail } from "@/pages/Task/TaskDetail/TaskDetail";
+import { Login } from "@/pages/Login/Login";
+import { Error } from "@/pages/Error/Error";
+
+export const router = createBrowserRouter([
+  // ---------- PRIVATE ROUTES ----------
+  {
+    path: "/",
+    element: (
+      <PrivateRoute>
+        <DefaultLayout />
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        index: true,
+        element: <Index />,
+      },
+      {
+        path: Routes.TASK,
+        element: <TaskDetail />,
+      },
+    ],
+  },
+
+  // ---------- NOT PRIVATE ROUTES ----------
+  {
+    path: "/",
+    element: <DefaultLayout />,
+    children: [
+      {
+        path: Routes.LOGIN,
+        element: <Login />,
+      },
+      {
+        path: Routes.ERROR,
+        element: <Error />,
+      },
+      {
+        path: "*",
+        element: <Error />,
+      },
+    ],
+  },
+]);
